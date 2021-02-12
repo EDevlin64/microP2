@@ -38,6 +38,7 @@ main.obj: C:/Users/Eddie/workspace_v10/Lab2/BoardSupportPackage/inc/uart.h
 main.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdio.h
 main.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdarg.h
 main.obj: C:/Users/Eddie/workspace_v10/Lab2/BoardSupportPackage/inc/RGBLeds.h
+main.obj: ../Threads.h
 
 ../main.c: 
 C:/Users/Eddie/workspace_v10/Lab2/G8RTOS/G8RTOS.h: 
@@ -77,3 +78,4 @@ C:/Users/Eddie/workspace_v10/Lab2/BoardSupportPackage/inc/uart.h:
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdio.h: 
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdarg.h: 
 C:/Users/Eddie/workspace_v10/Lab2/BoardSupportPackage/inc/RGBLeds.h: 
+../Threads.h: 

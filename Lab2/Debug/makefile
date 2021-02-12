@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./Threads.obj" \
 "./main.obj" \
 "./startup_msp432p401r_ccs.obj" \
 "./system_msp432p401r.obj" \
@@ -183,8 +184,8 @@ Lab2.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "BoardSupportPackage\src\AsciiLib.obj" "BoardSupportPackage\src\BSP.obj" "BoardSupportPackage\src\BackChannelUart.obj" "BoardSupportPackage\src\ClockSys.obj" "BoardSupportPackage\src\Joystick.obj" "BoardSupportPackage\src\RGBLeds.obj" "BoardSupportPackage\src\bme280.obj" "BoardSupportPackage\src\bme280_support.obj" "BoardSupportPackage\src\bmi160.obj" "BoardSupportPackage\src\bmi160_support.obj" "BoardSupportPackage\src\demo_sysctl.obj" "BoardSupportPackage\src\i2c_driver.obj" "BoardSupportPackage\src\opt3001.obj" "BoardSupportPackage\src\tmp007.obj" "BoardSupportPackage\src\uart.obj" "G8RTOS\G8RTOS_CriticalSection.obj" "G8RTOS\G8RTOS_Scheduler.obj" "G8RTOS\G8RTOS_SchedulerASM.obj" "G8RTOS\G8RTOS_Semaphores.obj" 
-	-$(RM) "main.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "BoardSupportPackage\src\AsciiLib.d" "BoardSupportPackage\src\BSP.d" "BoardSupportPackage\src\BackChannelUart.d" "BoardSupportPackage\src\ClockSys.d" "BoardSupportPackage\src\Joystick.d" "BoardSupportPackage\src\RGBLeds.d" "BoardSupportPackage\src\bme280.d" "BoardSupportPackage\src\bme280_support.d" "BoardSupportPackage\src\bmi160.d" "BoardSupportPackage\src\bmi160_support.d" "BoardSupportPackage\src\demo_sysctl.d" "BoardSupportPackage\src\i2c_driver.d" "BoardSupportPackage\src\opt3001.d" "BoardSupportPackage\src\tmp007.d" "BoardSupportPackage\src\uart.d" "G8RTOS\G8RTOS_Scheduler.d" "G8RTOS\G8RTOS_Semaphores.d" 
+	-$(RM) "Threads.obj" "main.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "BoardSupportPackage\src\AsciiLib.obj" "BoardSupportPackage\src\BSP.obj" "BoardSupportPackage\src\BackChannelUart.obj" "BoardSupportPackage\src\ClockSys.obj" "BoardSupportPackage\src\Joystick.obj" "BoardSupportPackage\src\RGBLeds.obj" "BoardSupportPackage\src\bme280.obj" "BoardSupportPackage\src\bme280_support.obj" "BoardSupportPackage\src\bmi160.obj" "BoardSupportPackage\src\bmi160_support.obj" "BoardSupportPackage\src\demo_sysctl.obj" "BoardSupportPackage\src\i2c_driver.obj" "BoardSupportPackage\src\opt3001.obj" "BoardSupportPackage\src\tmp007.obj" "BoardSupportPackage\src\uart.obj" "G8RTOS\G8RTOS_CriticalSection.obj" "G8RTOS\G8RTOS_Scheduler.obj" "G8RTOS\G8RTOS_SchedulerASM.obj" "G8RTOS\G8RTOS_Semaphores.obj" 
+	-$(RM) "Threads.d" "main.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "BoardSupportPackage\src\AsciiLib.d" "BoardSupportPackage\src\BSP.d" "BoardSupportPackage\src\BackChannelUart.d" "BoardSupportPackage\src\ClockSys.d" "BoardSupportPackage\src\Joystick.d" "BoardSupportPackage\src\RGBLeds.d" "BoardSupportPackage\src\bme280.d" "BoardSupportPackage\src\bme280_support.d" "BoardSupportPackage\src\bmi160.d" "BoardSupportPackage\src\bmi160_support.d" "BoardSupportPackage\src\demo_sysctl.d" "BoardSupportPackage\src\i2c_driver.d" "BoardSupportPackage\src\opt3001.d" "BoardSupportPackage\src\tmp007.d" "BoardSupportPackage\src\uart.d" "G8RTOS\G8RTOS_Scheduler.d" "G8RTOS\G8RTOS_Semaphores.d" 
 	-$(RM) "G8RTOS\G8RTOS_CriticalSection.d" "G8RTOS\G8RTOS_SchedulerASM.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

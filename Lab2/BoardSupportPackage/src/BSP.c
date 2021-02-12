@@ -23,8 +23,6 @@ void BSP_InitBoard()
 	/* Init i2c */
 	initI2C();
 
-	/* $$$ Ensure the sensor backpack is on the launchpad $$$ */
-
 	/* Init Opt3001 */
 	sensorOpt3001Enable(true);
 

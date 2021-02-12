@@ -8,9 +8,5 @@
 #include <stdint.h>
 #include "G8RTOS_Scheduler.h"
 #include "G8RTOS_Semaphores.h"
-//#include "G8RTOS_Structures.h"          // MIGHT NEED TO REMOVE
-
-
-
 
 #endif /* G8RTOS_H_ */
