@@ -80,18 +80,17 @@ int G8RTOS_WriteFIFO(uint32_t index, uint32_t data)
     // since the write FIFO is used in periodic tasks, if the mutex semaphore is blocked then it will wrongfully block a regular
     //G8RTOS_WaitSemaphore(&fifoArray[index].mutex);
     *fifoArray[index].tail = data;
+
     // release currentSize semaphore
     G8RTOS_SignalSemaphore(&fifoArray[index].currentSize);
+
     // check if current size is at full capacity
     if (fifoArray[index].currentSize > MAX_FIFO_SIZE - 1)
     {
         // discard new data, increment lostData, return error
         fifoArray[index].currentSize = MAX_FIFO_SIZE - 1;
         fifoArray[index].lostData++;
-        fifoArray[index].head++;
-        if(fifoArray[index].head == &fifoArray[index].head) {
-            fifoArray[index].head = fifoArray[index].buffer;
-        }
+
         return 1;
     }
     else
@@ -102,9 +101,7 @@ int G8RTOS_WriteFIFO(uint32_t index, uint32_t data)
             fifoArray[index].tail = fifoArray[index].buffer;
         }
 
-
     }
-
 
     //G8RTOS_SignalSemaphore(&fifoArray[index].mutex);
 

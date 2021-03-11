@@ -116,18 +116,6 @@ void SysTick_Handler()
 {
     SystemTime++;
 
-    if (SystemTime == 999)
-    {
-        int i;
-        i = 0;
-    }
-
-    if (SystemTime == 1699)
-    {
-        int i;
-        i = 0;
-    }
-
     /* PERIODIC THREADS*/
     if (NumberOfPeriodicThreads > 0)
     {

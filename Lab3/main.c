@@ -15,6 +15,7 @@ Personal Note:  This implementation uses naive spinlock semaphores - the
 #include "msp.h"
 #include "BSP.h"
 #include "Threads.h"
+#include "ThreadsQuiz.h"
 #include "gpio.h"
 
 void main(void)
@@ -46,6 +47,14 @@ void main(void)
     G8RTOS_AddThread(&idleThread);
     G8RTOS_AddPeriodicThread(&ptask0, 100);
     G8RTOS_AddPeriodicThread(&ptask1, 1000);
+
+
+    /* QUIZ */
+/*    G8RTOS_AddThread(&player_position);
+    G8RTOS_AddPeriodicThread(&score_thread, 1000);
+    G8RTOS_AddPeriodicThread(&player_joystick, 100);
+    G8RTOS_AddPeriodicThread(&coins, 5000);
+*/
 
     /* launch the OS */
     G8RTOS_Launch();

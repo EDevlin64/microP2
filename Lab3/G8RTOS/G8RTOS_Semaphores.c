@@ -37,41 +37,43 @@ void G8RTOS_InitSemaphore(semaphore_t *s, int32_t value)
 }
 
 /*
- * Waits for a semaphore to be available (value greater than 0)
- * 	- Decrements semaphore when available
- * 	- Spinlocks to wait for semaphore
- * Param "s": Pointer to semaphore to wait on
- * THIS IS A CRITICAL SECTION
+ * Wait Semaphore
+ *  - Check if the desired resource is available.
+ *  - If it is not, mark the currently running thread as blocked and start a context switch.
+ *  - Param "s": Pointer to semaphore to wait on
+ *  - THIS IS A CRITICAL SECTION
  */
 void G8RTOS_WaitSemaphore(semaphore_t *s)
 {
-    uint32_t i_state = StartCriticalSection();  // disable interrupts
+    uint32_t i_state = StartCriticalSection();
 
+    /* Lock the resource/semaphore*/
     (*s)--;
 
     if ((*s) < 0)
     {
         CurrentlyRunningThread->blocked = s;
 
-        EndCriticalSection(i_state);            // enable interrupts
-
-        G8RTOS_Yield();                         // triggers context switch to let other thread go instead
+        /* Triggers context switch to let other threads go instead */
+        G8RTOS_Yield();
     }
 
     EndCriticalSection(i_state);
 }
 
 /*
- * Signals the completion of the usage of a semaphore
- * 	- Increments the semaphore value by 1
- * Param "s": Pointer to semaphore to be signalled
- * THIS IS A CRITICAL SECTION
+ * Signal Semaphore
+ *  - Signals the completion of the usage of a resource.
+ *  - Unblock 1 thread blocked by this resource if there are any.
+ *  - Param "s": Pointer to semaphore to be signaled
+ *  - THIS IS A CRITICAL SECTION
  */
 void G8RTOS_SignalSemaphore(semaphore_t *s)
 {
 	uint32_t i_state = StartCriticalSection();
 
-	(*s)++;     // set the semaphore - resource
+	/* Release the resource/semaphore */
+	(*s)++;
 
 	if ((*s) <= 0)
 	{

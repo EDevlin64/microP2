@@ -26,6 +26,7 @@ void ptask0(void)
 {
     int16_t x_coord, y_coord;
     GetJoystickCoordinates(&x_coord, &y_coord);
+    // use global variable instead of FIFO
     joystickX = x_coord;
 
     //G8RTOS_WriteFIFO(FIFO_INDEX_JOYSTICK, x_coord);
@@ -60,18 +61,17 @@ void task0(void)
     int32_t temperature;
     while(1)
     {
+        // read uncompensated temp and then covert to compensated temp (C)
         G8RTOS_WaitSemaphore(&sensorI2cSemaphore);
-        //Read the uncompensated temperature value
         bme280_read_uncomp_temperature(&temperature);
-        //Convert the temperature to Celsius
         temperature = bme280_compensate_temperature_int32(temperature);
         G8RTOS_SignalSemaphore(&sensorI2cSemaphore);
-        //Convert the temperature to Fahrenheit
+
+        // Convert the temperature to Fahrenheit, send the data to the temp FIFO and toggle GPIO 2.1 (LED on msp)
         temperature = (temperature * 9) / 500 + 32;
-        //Send data to temperature FIFO
         G8RTOS_WriteFIFO(FIFO_INDEX_TEMP, temperature);
-        //Toggle P2.1
         BITBAND_PERI(P2->OUT, 1) = !BITBAND_PERI(P2->OUT, 1);
+
         G8RTOS_Sleep(500);
     }
 }
@@ -88,15 +88,13 @@ void task1(void)
     uint16_t lightData;
     while(1)
     {
-        //Read light sensor
+        //Read light sensor, send to light FIFO then toggle GPIO 2.2 (LED on msp)
         G8RTOS_WaitSemaphore(&sensorI2cSemaphore);
         sensorOpt3001Read(&lightData);
         G8RTOS_SignalSemaphore(&sensorI2cSemaphore);
-        //Send data to light FIFO
         G8RTOS_WriteFIFO(FIFO_INDEX_LIGHT, lightData);
-        //Toggle P2.2
         BITBAND_PERI(P2->OUT, 2) = !BITBAND_PERI(P2->OUT, 2);
-        //Sleep for 200ms
+
         G8RTOS_Sleep(200);
     }
 }
@@ -189,17 +187,17 @@ void task4(void)
         decayedJoystickAvg = (decayedJoystickAvg + joystickX) >> 1;
 
         //Set led bit mask corresponding to the joystick data
-        if(x_coord > 6000) ledBitMask = 0xF0;
-        else if(x_coord > 4000) ledBitMask = 0x70;
-        else if(x_coord > 2000) ledBitMask = 0x30;
-        else if(x_coord > 500) ledBitMask = 0x10;
+        if(x_coord > 6000) ledBitMask = 0x0F;
+        else if(x_coord > 4000) ledBitMask = 0x0E;
+        else if(x_coord > 2000) ledBitMask = 0x0C;
+        else if(x_coord > 500) ledBitMask = 0x08;
         else if(x_coord > -500) ledBitMask = 0x00;
-        else if(x_coord > -2000) ledBitMask = 0x08;
-        else if(x_coord > -4000) ledBitMask = 0x0C;
-        else if(x_coord > -6000) ledBitMask = 0x0E;
-        else ledBitMask = 0x0F;
+        else if(x_coord > -2000) ledBitMask = 0x10;
+        else if(x_coord > -4000) ledBitMask = 0x30;
+        else if(x_coord > -6000) ledBitMask = 0x70;
+        else ledBitMask = 0xF0;
 
-        //Output data to LEDs
+        //Output data to LEDs only if ledBitMask has changed
         if(ledBitMask != oldLedBitMask)
         {
             G8RTOS_WaitSemaphore(&ledI2cSemaphore);

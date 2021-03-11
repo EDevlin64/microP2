@@ -39,6 +39,7 @@ main.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdio.h
 main.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdarg.h
 main.obj: C:/Users/Eddie/workspace_v10/Lab3/BoardSupportPackage/inc/RGBLeds.h
 main.obj: ../Threads.h
+main.obj: ../ThreadsQuiz.h
 main.obj: C:/Users/Eddie/workspace_v10/Lab3/BoardSupportPackage/DriverLib/gpio.h
 
 ../main.c: 
@@ -80,4 +81,5 @@ C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdio.h:
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdarg.h: 
 C:/Users/Eddie/workspace_v10/Lab3/BoardSupportPackage/inc/RGBLeds.h: 
 ../Threads.h: 
+../ThreadsQuiz.h: 
 C:/Users/Eddie/workspace_v10/Lab3/BoardSupportPackage/DriverLib/gpio.h: 
